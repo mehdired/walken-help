@@ -1,7 +1,10 @@
 import { styled } from '@stitches/react'
 import { useEffect } from 'react'
-import { fetchCoin } from '../features/CoinSlice'
+import { fetchCoin } from '@features/CoinSlice'
 import { useAppDispatch, useAppSelector } from '../store'
+
+import SolanaLogo from '../assets/logos/solana.svg'
+import WalkenLogo from '../assets/logos/walken.svg'
 
 const StyledCoinList = styled('ul', {
 	backgroundColor: '#fff',
@@ -31,6 +34,7 @@ export default function Coin() {
 				<>
 					{coin.list.map((element) => (
 						<li key={element.symbol}>
+							<img src={element.symbol === 'solana' ? SolanaLogo : WalkenLogo} />
 							{element.symbol} {element.price}
 						</li>
 					))}

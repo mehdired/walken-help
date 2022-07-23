@@ -11,8 +11,9 @@ const initialState = {
 		{
 			symbol: 'solana',
 			price: 0,
+			logo: 'solana.svg',
 		},
-		{ symbol: 'walken', price: 0 },
+		{ symbol: 'walken', price: 0, logo: 'walken.svg' },
 	],
 }
 
