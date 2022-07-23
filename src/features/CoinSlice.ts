@@ -17,7 +17,9 @@ const initialState = {
 }
 
 export const fetchCoin = createAsyncThunk('coin/fetchCoin', async () => {
-	const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana,walken&vs_currencies=USD')
+	const response = await fetch(
+		'https://api.coingecko.com/api/v3/simple/price?ids=solana,walken&vs_currencies=USD&include_24hr_change=true'
+	)
 	const data: {
 		[key: string]: {
 			usd: number
