@@ -8,6 +8,7 @@ export default defineConfig({
 	plugins: [react(), reactSvgPlugin()],
 	resolve: {
 		alias: {
+			'@': path.resolve(__dirname, './src'),
 			'@components': path.resolve(__dirname, './src/components'),
 			'@features': path.resolve(__dirname, './src/features'),
 			'@assets': path.resolve(__dirname, './src/assets'),

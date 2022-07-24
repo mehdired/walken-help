@@ -1,4 +1,4 @@
-import { styled } from '@stitches/react'
+import { styled, theme } from '../../stitches.config'
 import { useEffect } from 'react'
 import { fetchCoin } from '@features/CoinSlice'
 import { useAppDispatch, useAppSelector } from '../store'
@@ -8,16 +8,36 @@ import WalkenLogo from '../assets/logos/walken.svg'
 
 const StyledCoinList = styled('ul', {
 	backgroundColor: '#fff',
-	borderRadius: '10px',
-	boxShadow: '1px -1px 9px #000',
+	borderRadius: '12px',
+	boxShadow: `0px 4px 12px ${theme.colors.shadow}`,
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'space-between',
-	padding: '10px 0',
+	padding: '18px 10px',
 	listStyle: 'none',
-	width: '140px',
 	position: 'absolute',
 	right: '0',
+	border: `1px solid ${theme.colors.border}`,
+})
+
+const StyledCoinListItem = styled('li', {
+	display: 'flex',
+	alignItems: 'center',
+
+	'&:last-child': {
+		marginLeft: '15px',
+	},
+})
+
+const StyledLogo = styled('img', {
+	width: '20px',
+	height: '20px',
+	marginRight: '5px',
+})
+
+const StyledPrice = styled('span', {
+	color: '$mainText',
+	fontSize: '14px',
 })
 
 export default function Coin() {
@@ -28,18 +48,16 @@ export default function Coin() {
 		dispatch(fetchCoin())
 	}, [dispatch])
 
+	if (coin.loading) return
+
 	return (
 		<StyledCoinList>
-			{!coin.loading && (
-				<>
-					{coin.list.map((element) => (
-						<li key={element.symbol}>
-							<img src={element.symbol === 'solana' ? SolanaLogo : WalkenLogo} />
-							{element.symbol} {element.price}
-						</li>
-					))}
-				</>
-			)}
+			{coin.list.map((element) => (
+				<StyledCoinListItem key={element.symbol}>
+					<StyledLogo src={element.symbol === 'solana' ? SolanaLogo : WalkenLogo} />
+					<StyledPrice>{element.price}</StyledPrice>
+				</StyledCoinListItem>
+			))}
 		</StyledCoinList>
 	)
 }
