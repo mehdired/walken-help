@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import coinReducer from './features/CoinSlice'
+import coinReducer from '@features/CoinSlice'
+import cathleteReducer from '@features/CathleteSlice'
 
 export const store = configureStore({
 	reducer: {
 		coin: coinReducer,
+		cathlete: cathleteReducer,
 	},
 })
 
