@@ -48,7 +48,7 @@ export default function Coin() {
 		dispatch(fetchCoin())
 	}, [dispatch])
 
-	if (coin.loading) return
+	if (coin.loading) return null
 
 	return (
 		<StyledCoinList>
