@@ -2,11 +2,12 @@ import { styled } from '../stitches.config'
 import { globalCss } from '@stitches/react'
 import Cathlete from '@components/Cathlete'
 import Coin from '@components/Coin'
+import Rarity from '@components/Rarity'
 
 const globalStyles = globalCss({
 	'@font-face': {
 		fontFamily: 'Nunito Sans',
-		src: 'url("/assets/fonts/nunito-sans-400.woff2") format("woff2")',
+		src: 'url("/fonts/nunito-sans-400.woff2") format("woff2")',
 	},
 	body: {
 		fontFamily: '$main',

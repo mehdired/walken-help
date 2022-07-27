@@ -21,7 +21,7 @@ export const cathleteSlice = createSlice({
 		},
 		onChangeInput: (state, { payload }: PayloadAction<{ id: string; value: string; inputType: string }>) => {
 			const goodCath = state.find((cat) => cat.id === payload.id)
-			console.log(payload)
+
 			if (goodCath) {
 				if (payload.inputType === 'rarity') goodCath.rarity = payload.value
 				if (payload.inputType === 'level') goodCath.level = parseInt(payload.value)

@@ -3,9 +3,6 @@ import { useEffect } from 'react'
 import { fetchCoin } from '@features/CoinSlice'
 import { useAppDispatch, useAppSelector } from '../store'
 
-import SolanaLogo from '../assets/logos/solana.svg'
-import WalkenLogo from '../assets/logos/walken.svg'
-
 const StyledCoinList = styled('ul', {
 	backgroundColor: '#fff',
 	borderRadius: '12px',
@@ -54,7 +51,7 @@ export default function Coin() {
 		<StyledCoinList>
 			{coin.list.map((element) => (
 				<StyledCoinListItem key={element.symbol}>
-					<StyledLogo src={element.symbol === 'solana' ? SolanaLogo : WalkenLogo} />
+					<StyledLogo src={`/images/${element.symbol}.svg`} />
 					<StyledPrice>{element.price}</StyledPrice>
 				</StyledCoinListItem>
 			))}
