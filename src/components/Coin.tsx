@@ -37,7 +37,7 @@ const StyledLogo = styled('img', {
 
 const StyledPrice = styled('span', {
 	color: '$mainText',
-	fontSize: '14px',
+	fontSize: '12px',
 })
 
 export default function Coin() {

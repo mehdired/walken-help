@@ -12,5 +12,8 @@ export const { styled, theme } = createStitches({
 			border: '#ecf0f4',
 			mainText: '#6e7379',
 		},
+		fonts: {
+			main: 'Nunito Sans',
+		},
 	},
 })
