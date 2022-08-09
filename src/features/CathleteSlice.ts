@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
-import { RarityTypes } from '@/types/Rarity'
+import { RarityEnum, RarityTypes } from '@/types/Rarity'
 
 export interface Cathlete {
 	id: string
@@ -8,7 +8,7 @@ export interface Cathlete {
 	validated: boolean
 }
 
-const initCathlete = { id: nanoid(), rarity: 'Common', level: 0, validated: false }
+const initCathlete = { id: nanoid(), rarity: RarityEnum.COMMON, level: 0, validated: false }
 
 const initialState: Cathlete[] = [initCathlete]
 
@@ -19,12 +19,18 @@ export const cathleteSlice = createSlice({
 		addCathlete: (state) => {
 			return [...state, { ...initCathlete, id: nanoid() }]
 		},
-		onChangeInput: (state, { payload }: PayloadAction<{ id: string; value: string; inputType: string }>) => {
+		onChangeRarity: (state, { payload }: PayloadAction<{ id: string; value: RarityTypes }>) => {
 			const goodCath = state.find((cat) => cat.id === payload.id)
 
 			if (goodCath) {
-				if (payload.inputType === 'rarity') goodCath.rarity = payload.value
-				if (payload.inputType === 'level') goodCath.level = parseInt(payload.value)
+				goodCath.rarity = payload.value
+			}
+		},
+		onChangeLevel: (state, { payload }: PayloadAction<{ id: string; value: string }>) => {
+			const goodCath = state.find((cat) => cat.id === payload.id)
+
+			if (goodCath) {
+				goodCath.level = parseInt(payload.value)
 			}
 		},
 		validateCathlete: (state, { payload }: PayloadAction<string>) => {
@@ -37,6 +43,6 @@ export const cathleteSlice = createSlice({
 	},
 })
 
-export const { addCathlete, onChangeInput, validateCathlete } = cathleteSlice.actions
+export const { addCathlete, onChangeRarity, onChangeLevel, validateCathlete } = cathleteSlice.actions
 
 export default cathleteSlice.reducer

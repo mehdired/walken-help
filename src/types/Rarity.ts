@@ -1,11 +1,9 @@
 export enum RarityEnum {
-	COMMON = 'Common',
-	UNCOMMON = 'Uncommon',
-	RARE = 'Rare',
-	EPIC = 'Epic',
-	LEGENDARY = 'Legendary',
+	COMMON = 'common',
+	UNCOMMON = 'uncommon',
+	RARE = 'rare',
+	EPIC = 'epic',
+	LEGENDARY = 'legendary',
 }
 
-type ValueOf<T> = T[keyof T]
-
-export type RarityTypes = ValueOf<RarityEnum>
+export type RarityTypes = `${RarityEnum}`
