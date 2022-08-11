@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
-import { RarityEnum, RarityTypes } from '@/types/Rarity'
+import { RarityTypes } from '@/types/Rarity'
 
 export interface Cathlete {
 	id: string
@@ -8,7 +8,7 @@ export interface Cathlete {
 	validated: boolean
 }
 
-const initCathlete = { id: nanoid(), rarity: RarityEnum.COMMON, level: 0, validated: false }
+const initCathlete = { id: nanoid(), rarity: 'common' as const, level: 0, validated: false }
 
 const initialState: Cathlete[] = [initCathlete]
 

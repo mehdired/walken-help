@@ -1,4 +1,4 @@
-import { RarityEnum, RarityTypes } from '@/types/Rarity'
+import { RARITIES, RarityTypes } from '@/types/Rarity'
 
 type Props = {
 	id: string
@@ -26,9 +26,9 @@ export default function CathleteForm({ id, level, onChangeRarity, onChangeLevel,
 					onChangeRarity(id, currentTarget.value as RarityTypes)
 				}}
 			>
-				{(Object.keys(RarityEnum) as (keyof typeof RarityEnum)[]).map((rarityKey) => (
-					<option value={RarityEnum[rarityKey]} key={RarityEnum[rarityKey]}>
-						{RarityEnum[rarityKey]}
+				{RARITIES.map((rarity) => (
+					<option value={rarity} key={rarity}>
+						{rarity}
 					</option>
 				))}
 			</select>

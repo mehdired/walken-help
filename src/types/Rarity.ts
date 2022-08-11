@@ -1,9 +1,3 @@
-export enum RarityEnum {
-	COMMON = 'common',
-	UNCOMMON = 'uncommon',
-	RARE = 'rare',
-	EPIC = 'epic',
-	LEGENDARY = 'legendary',
-}
+export const RARITIES = ['common', 'uncommon', 'rare', 'epic', 'legendary'] as const
 
-export type RarityTypes = `${RarityEnum}`
+export type RarityTypes = typeof RARITIES[number]
