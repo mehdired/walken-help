@@ -1,4 +1,9 @@
+import { styled } from '@/../stitches.config'
 import { RARITIES, RarityTypes } from '@/types/Rarity'
+
+const StyledSelect = styled('select', {
+	textTransform: 'capitalize',
+})
 
 type Props = {
 	id: string
@@ -21,7 +26,7 @@ export default function CathleteForm({ id, level, onChangeRarity, onChangeLevel,
 				}}
 			/>
 			<span>{level}</span>
-			<select
+			<StyledSelect
 				onChange={({ currentTarget }) => {
 					onChangeRarity(id, currentTarget.value as RarityTypes)
 				}}
@@ -31,7 +36,7 @@ export default function CathleteForm({ id, level, onChangeRarity, onChangeLevel,
 						{rarity}
 					</option>
 				))}
-			</select>
+			</StyledSelect>
 			<button
 				onClick={() => {
 					onClickValidate(id)

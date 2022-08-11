@@ -7,9 +7,29 @@ const StyledCathleteValidated = styled('div', {
 	alignItems: 'center',
 	justifyContent: 'center',
 	flexDirection: 'column',
+})
 
-	p: {
-		color: '$mainText',
+const StyledRarityText = styled('p', {
+	textTransform: 'capitalize',
+
+	variants: {
+		rarity: {
+			common: {
+				color: '$common',
+			},
+			uncommon: {
+				color: '$uncommon',
+			},
+			rare: {
+				color: '$rare',
+			},
+			epic: {
+				color: '$epic',
+			},
+			legendary: {
+				color: '$legendary',
+			},
+		},
 	},
 })
 
@@ -32,7 +52,6 @@ const StyledIcon = styled('div', {
 		left: 0,
 		width: '100%',
 		height: '100%',
-		backgroundColor: '$common',
 		opacity: '0.1',
 	},
 
@@ -79,12 +98,12 @@ type Props = {
 export default function CathleteValidated({ level, rarity }: Props) {
 	return (
 		<StyledCathleteValidated>
-			<p>level {level}</p>
+			<p style={{ marginBottom: '7px' }}>level {level}</p>
 			<div>
 				<StyledIcon rarity={rarity}>
 					<img src={`/images/${rarity}.svg`} />
 				</StyledIcon>
-				<p>{rarity.toString()}</p>
+				<StyledRarityText rarity={rarity}>{rarity}</StyledRarityText>
 			</div>
 		</StyledCathleteValidated>
 	)
