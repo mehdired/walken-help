@@ -52,7 +52,7 @@ export default function Coin() {
 			{coin.list.map((element) => (
 				<StyledCoinListItem key={element.symbol}>
 					<StyledLogo src={`/images/${element.symbol}.svg`} />
-					<StyledPrice>{element.price}</StyledPrice>
+					<StyledPrice>${element.price}</StyledPrice>
 				</StyledCoinListItem>
 			))}
 		</StyledCoinList>

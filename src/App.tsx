@@ -2,7 +2,7 @@ import { styled } from '../stitches.config'
 import { globalCss } from '@stitches/react'
 import Cathlete from '@components/Cathlete'
 import Coin from '@components/Coin'
-import Rarity from '@components/Rarity'
+import Earn from '@components/Earn'
 
 const globalStyles = globalCss({
 	'@font-face': {
@@ -28,6 +28,7 @@ export default function App() {
 		<StyledApp className="App">
 			<div style={{ position: 'relative' }}>
 				<Coin />
+				<Earn />
 				<Cathlete />
 			</div>
 		</StyledApp>
