@@ -1,4 +1,4 @@
-import { addCathlete, onChangeRarity, onChangeLevel, validateCathlete } from '@features/CathleteSlice'
+import { addCathlete, onChangeRarity, onChangeLevel, validateCathlete, earnCathlete } from '@features/CathleteSlice'
 import { styled, theme } from '../../stitches.config'
 
 import { useAppDispatch, useAppSelector } from '../store'
@@ -30,13 +30,14 @@ export default function Cathlete({}: Props) {
 		dispatch(onChangeLevel({ id, value }))
 	}
 
-	const handleValidate = (id: string) => {
+	const handleValidateCath = (id: string) => {
 		dispatch(validateCathlete(id))
+		dispatch(earnCathlete(id))
 	}
 
 	return (
 		<div>
-			{cathlete.map(({ id, validated, rarity, level }) => (
+			{cathlete.map(({ id, validated, rarity, level, earnPerDay }) => (
 				<StyledCathlete key={id}>
 					{!validated ? (
 						<CathleteForm
@@ -44,10 +45,10 @@ export default function Cathlete({}: Props) {
 							level={level}
 							onChangeRarity={handleChangeRarity}
 							onChangeLevel={handleChangeLevel}
-							onClickValidate={handleValidate}
+							onClickValidate={handleValidateCath}
 						/>
 					) : (
-						<CathleteValidated level={level} rarity={rarity} />
+						<CathleteValidated level={level} rarity={rarity} earn={earnPerDay} />
 					)}
 				</StyledCathlete>
 			))}

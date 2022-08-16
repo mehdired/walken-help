@@ -7,6 +7,7 @@ const StyledCathleteValidated = styled('div', {
 	alignItems: 'center',
 	justifyContent: 'center',
 	flexDirection: 'column',
+	position: 'relative',
 })
 
 const StyledRarityText = styled('p', {
@@ -31,6 +32,13 @@ const StyledRarityText = styled('p', {
 			},
 		},
 	},
+})
+
+const StyledEarn = styled('p', {
+	position: 'absolute',
+	right: 0,
+	top: 0,
+	fontSize: 11,
 })
 
 const StyledIcon = styled('div', {
@@ -93,11 +101,13 @@ const StyledIcon = styled('div', {
 type Props = {
 	level: number
 	rarity: RarityTypes
+	earn: number
 }
 
-export default function CathleteValidated({ level, rarity }: Props) {
+export default function CathleteValidated({ level, rarity, earn }: Props) {
 	return (
 		<StyledCathleteValidated>
+			<StyledEarn>Earn Max : {earn} WLKN</StyledEarn>
 			<p style={{ marginBottom: '7px' }}>level {level}</p>
 			<div>
 				<StyledIcon rarity={rarity}>

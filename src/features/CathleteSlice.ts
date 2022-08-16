@@ -2,12 +2,14 @@ import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 import { RarityTypes } from '@/types/Rarity'
 import { EnergyType, energy } from '@/types/Energy'
 import { LevelType } from '@/types/Level'
+import { leagues } from '@/types/League'
 
 export interface Cathlete {
 	id: string
 	rarity: RarityTypes
 	level: LevelType
 	energy: EnergyType
+	earnPerDay: number
 	validated: boolean
 }
 
@@ -16,6 +18,7 @@ const initCathlete = {
 	rarity: 'common' as const,
 	level: 0 as const,
 	energy: energy.common,
+	earnPerDay: 0,
 	validated: false,
 }
 
@@ -50,9 +53,19 @@ export const cathleteSlice = createSlice({
 				goodCath.validated = true
 			}
 		},
+		earnCathlete: (state, { payload }: PayloadAction<string>) => {
+			const goodCath = state.find((cat) => cat.id === payload)
+
+			if (goodCath) {
+				const MINUTES_PER_DAY = 1440
+				const goodLeague = leagues.find((league) => goodCath.level - 1 <= league.minLevel)
+				const wlknEar = (MINUTES_PER_DAY / goodCath.energy.cooldown) * goodLeague?.reward!
+				goodCath.earnPerDay = Number(wlknEar.toFixed(2))
+			}
+		},
 	},
 })
 
-export const { addCathlete, onChangeRarity, onChangeLevel, validateCathlete } = cathleteSlice.actions
+export const { addCathlete, onChangeRarity, onChangeLevel, validateCathlete, earnCathlete } = cathleteSlice.actions
 
 export default cathleteSlice.reducer

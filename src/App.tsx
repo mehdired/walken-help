@@ -12,6 +12,7 @@ const globalStyles = globalCss({
 	body: {
 		fontFamily: '$main',
 		fontWeight: 400,
+		color: '$mainText',
 	},
 })
 
