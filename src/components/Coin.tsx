@@ -33,7 +33,6 @@ const StyledLogo = styled('img', {
 })
 
 const StyledPrice = styled('span', {
-	color: '$mainText',
 	fontSize: '12px',
 })
 
