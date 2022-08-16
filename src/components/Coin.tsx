@@ -20,6 +20,7 @@ const StyledCoinList = styled('ul', {
 const StyledCoinListItem = styled('li', {
 	display: 'flex',
 	alignItems: 'center',
+	flexDirection: 'column',
 
 	'&:last-child': {
 		marginLeft: '15px',
@@ -36,6 +37,21 @@ const StyledPrice = styled('span', {
 	fontSize: '12px',
 })
 
+const StyledChange = styled('p', {
+	fontSize: '11px',
+
+	variants: {
+		color: {
+			red: {
+				color: '#e15241',
+			},
+			green: {
+				color: '#8dc647',
+			},
+		},
+	},
+})
+
 export default function Coin() {
 	const coin = useAppSelector((state) => state.coin)
 	const dispatch = useAppDispatch()
@@ -50,8 +66,11 @@ export default function Coin() {
 		<StyledCoinList>
 			{coin.list.map((element) => (
 				<StyledCoinListItem key={element.symbol}>
-					<StyledLogo src={`/images/${element.symbol}.svg`} />
-					<StyledPrice>${element.price}</StyledPrice>
+					<div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+						<StyledLogo src={`/images/${element.symbol}.svg`} />
+						<StyledPrice>${element.price}</StyledPrice>
+					</div>
+					<StyledChange color={element.colorChange}>{element.change}%</StyledChange>
 				</StyledCoinListItem>
 			))}
 		</StyledCoinList>
