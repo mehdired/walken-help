@@ -11,12 +11,15 @@ export default function SaveData() {
 	}
 
 	return (
-		<input
-			type="checkbox"
-			checked={save.saving}
-			onChange={(event) => {
-				handleChangeCheckbox(event)
-			}}
-		/>
+		<div>
+			<input
+				type="checkbox"
+				checked={save.saving}
+				onChange={(event) => {
+					handleChangeCheckbox(event)
+				}}
+			/>
+			<button>Reset</button>
+		</div>
 	)
 }
