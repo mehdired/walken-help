@@ -1,17 +1,9 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 import { RarityTypes } from '@/types/Rarity'
-import { EnergyType, energy } from '@/types/Energy'
+import { energy } from '@/types/Energy'
 import { LevelType } from '@/types/Level'
 import { leagues } from '@/types/League'
-
-export interface Cathlete {
-	id: string
-	rarity: RarityTypes
-	level: LevelType
-	energy: EnergyType
-	earnPerDay: number
-	validated: boolean
-}
+import { Cathlete } from '@/types/Cathletes'
 
 const initCathlete = {
 	id: nanoid(),

@@ -1,4 +1,5 @@
 import { addCathlete, onChangeRarity, onChangeLevel, validateCathlete, earnCathlete } from '@features/CathleteSlice'
+import { onChangeCheckbox, savingData } from '@features/SaveDataSlice'
 import { styled, theme } from '../../stitches.config'
 
 import { useAppDispatch, useAppSelector } from '../store'
@@ -33,6 +34,7 @@ export default function Cathlete({}: Props) {
 	const handleValidateCath = (id: string) => {
 		dispatch(validateCathlete(id))
 		dispatch(earnCathlete(id))
+		dispatch(savingData(cathlete))
 	}
 
 	return (
