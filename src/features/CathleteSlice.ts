@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 import { RarityTypes } from '@/types/Rarity'
-import { energy } from '@/types/Energy'
+import { energyMap } from '@/types/Energy'
 import { LevelType } from '@/types/Level'
 import { leagues } from '@/types/League'
 import { Cathlete } from '@/types/Cathletes'
@@ -9,7 +9,7 @@ const initCathlete = {
 	id: nanoid(),
 	rarity: 'common' as const,
 	level: 0 as const,
-	energy: energy.common,
+	energy: energyMap.get('common')!,
 	earnPerDay: 0,
 	validated: false,
 }
@@ -41,7 +41,7 @@ export const cathleteSlice = createSlice({
 			const goodCath = state.find((cat) => cat.id === payload)
 
 			if (goodCath) {
-				goodCath.energy = energy[goodCath.rarity]
+				goodCath.energy = energyMap.get(goodCath.rarity)!
 				goodCath.validated = true
 			}
 		},
