@@ -1,17 +1,9 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 import { RarityTypes } from '@/types/Rarity'
-import { EnergyType, energy } from '@/types/Energy'
+import { energy } from '@/types/Energy'
 import { LevelType } from '@/types/Level'
 import { leagues } from '@/types/League'
-
-export interface Cathlete {
-	id: string
-	rarity: RarityTypes
-	level: LevelType
-	energy: EnergyType
-	earnPerDay: number
-	validated: boolean
-}
+import { Cathlete } from '@/types/Cathletes'
 
 const initCathlete = {
 	id: nanoid(),
@@ -63,9 +55,28 @@ export const cathleteSlice = createSlice({
 				goodCath.earnPerDay = Number(wlknEar.toFixed(2))
 			}
 		},
+		fillFromStorage: (state) => {
+			const storage = window.localStorage.getItem('wh-cath')
+
+			if (storage) {
+				return [...JSON.parse(storage)]
+			}
+		},
+
+		savingData: (state) => {
+			window.localStorage.setItem('wh-cath', JSON.stringify(state))
+		},
 	},
 })
 
-export const { addCathlete, onChangeRarity, onChangeLevel, validateCathlete, earnCathlete } = cathleteSlice.actions
+export const {
+	addCathlete,
+	onChangeRarity,
+	onChangeLevel,
+	validateCathlete,
+	earnCathlete,
+	fillFromStorage,
+	savingData,
+} = cathleteSlice.actions
 
 export default cathleteSlice.reducer
