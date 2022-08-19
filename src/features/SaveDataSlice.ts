@@ -1,4 +1,3 @@
-import { Cathlete } from '@/types/Cathletes'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const LOCAL_STORAGE = 'wh-cath'
@@ -13,14 +12,14 @@ export const saveSlice = createSlice({
 			if (!state.saving) window.localStorage.removeItem(LOCAL_STORAGE)
 		},
 
-		savingData: (state, { payload }: PayloadAction<Cathlete[]>) => {
-			if (state.saving) {
-				window.localStorage.setItem(LOCAL_STORAGE, JSON.stringify(payload))
+		checkboxCheckedOnLoad: (state) => {
+			if (window.localStorage.getItem(LOCAL_STORAGE)) {
+				state.saving = true
 			}
 		},
 	},
 })
 
-export const { onChangeCheckbox, savingData } = saveSlice.actions
+export const { onChangeCheckbox, checkboxCheckedOnLoad } = saveSlice.actions
 
 export default saveSlice.reducer

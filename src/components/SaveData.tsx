@@ -1,12 +1,16 @@
 import { useAppSelector, useAppDispatch } from '@/store'
-import { onChangeCheckbox } from '@features/SaveDataSlice'
+import { onChangeCheckbox, checkboxCheckedOnLoad } from '@features/SaveDataSlice'
+import { useEffect } from 'react'
 
 export default function SaveData() {
 	const save = useAppSelector((state) => state.saveData)
 	const dispatch = useAppDispatch()
 
+	useEffect(() => {
+		dispatch(checkboxCheckedOnLoad())
+	}, [])
+
 	const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-		console.log(event.target.checked)
 		dispatch(onChangeCheckbox(event.target.checked))
 	}
 

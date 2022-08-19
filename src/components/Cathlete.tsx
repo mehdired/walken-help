@@ -1,5 +1,13 @@
-import { addCathlete, onChangeRarity, onChangeLevel, validateCathlete, earnCathlete } from '@features/CathleteSlice'
-import { onChangeCheckbox, savingData } from '@features/SaveDataSlice'
+import { useEffect } from 'react'
+import {
+	addCathlete,
+	onChangeRarity,
+	onChangeLevel,
+	validateCathlete,
+	earnCathlete,
+	fillFromStorage,
+	savingData,
+} from '@features/CathleteSlice'
 import { styled, theme } from '../../stitches.config'
 
 import { useAppDispatch, useAppSelector } from '../store'
@@ -21,7 +29,12 @@ type Props = {}
 
 export default function Cathlete({}: Props) {
 	const cathlete = useAppSelector((state) => state.cathlete)
+	const saveData = useAppSelector((state) => state.saveData)
 	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		dispatch(fillFromStorage())
+	}, [])
 
 	const handleChangeRarity = (id: string, value: RarityTypes) => {
 		dispatch(onChangeRarity({ id, value }))
@@ -34,7 +47,10 @@ export default function Cathlete({}: Props) {
 	const handleValidateCath = (id: string) => {
 		dispatch(validateCathlete(id))
 		dispatch(earnCathlete(id))
-		dispatch(savingData(cathlete))
+
+		if (saveData) {
+			dispatch(savingData())
+		}
 	}
 
 	return (

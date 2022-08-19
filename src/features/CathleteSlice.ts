@@ -55,9 +55,28 @@ export const cathleteSlice = createSlice({
 				goodCath.earnPerDay = Number(wlknEar.toFixed(2))
 			}
 		},
+		fillFromStorage: (state) => {
+			const storage = window.localStorage.getItem('wh-cath')
+
+			if (storage) {
+				return [...JSON.parse(storage)]
+			}
+		},
+
+		savingData: (state) => {
+			window.localStorage.setItem('wh-cath', JSON.stringify(state))
+		},
 	},
 })
 
-export const { addCathlete, onChangeRarity, onChangeLevel, validateCathlete, earnCathlete } = cathleteSlice.actions
+export const {
+	addCathlete,
+	onChangeRarity,
+	onChangeLevel,
+	validateCathlete,
+	earnCathlete,
+	fillFromStorage,
+	savingData,
+} = cathleteSlice.actions
 
 export default cathleteSlice.reducer
