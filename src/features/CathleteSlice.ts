@@ -68,6 +68,7 @@ export const cathleteSlice = createSlice({
 		},
 
 		resetCathState: () => {
+			window.localStorage.setItem('wh-cath', JSON.stringify([initCathlete]))
 			return [initCathlete]
 		},
 	},
