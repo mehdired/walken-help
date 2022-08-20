@@ -18,7 +18,6 @@ export const saveSlice = createSlice({
 			if (window.localStorage.getItem(LOCAL_STORAGE)) {
 				state.saving = true
 			}
-			console.log('haha')
 		},
 	},
 })
