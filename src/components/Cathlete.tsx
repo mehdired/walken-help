@@ -7,6 +7,7 @@ import {
 	earnCathlete,
 	fillFromStorage,
 	savingData,
+	resetCathState,
 } from '@features/CathleteSlice'
 import { styled, theme } from '../../stitches.config'
 
@@ -53,8 +54,13 @@ export default function Cathlete({}: Props) {
 		}
 	}
 
+	const handleReset = () => {
+		dispatch(resetCathState())
+	}
+
 	return (
 		<div>
+			<button onClick={handleReset}>Reset cathletes</button>
 			{cathlete.map(({ id, validated, rarity, level, earnPerDay }) => (
 				<StyledCathlete key={id}>
 					{!validated ? (

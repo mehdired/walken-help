@@ -18,12 +18,13 @@ export default function SaveData() {
 		<div>
 			<input
 				type="checkbox"
+				id="save-data"
 				checked={save.saving}
 				onChange={(event) => {
 					handleChangeCheckbox(event)
 				}}
 			/>
-			<button>Reset</button>
+			<label htmlFor="save-data">Save for the next visit</label>
 		</div>
 	)
 }
