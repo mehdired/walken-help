@@ -66,6 +66,11 @@ export const cathleteSlice = createSlice({
 		savingData: (state) => {
 			window.localStorage.setItem('wh-cath', JSON.stringify(state))
 		},
+
+		resetCathState: () => {
+			window.localStorage.setItem('wh-cath', JSON.stringify([initCathlete]))
+			return [initCathlete]
+		},
 	},
 })
 
@@ -77,6 +82,7 @@ export const {
 	earnCathlete,
 	fillFromStorage,
 	savingData,
+	resetCathState,
 } = cathleteSlice.actions
 
 export default cathleteSlice.reducer
