@@ -22,6 +22,6 @@ export const saveSlice = createSlice({
 	},
 })
 
-export const { onChangeCheckbox, checkboxCheckedOnLoad, resetDataState } = saveSlice.actions
+export const { onChangeCheckbox, checkboxCheckedOnLoad } = saveSlice.actions
 
 export default saveSlice.reducer
