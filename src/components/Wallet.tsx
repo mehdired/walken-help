@@ -1,26 +1,31 @@
-import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
-import { useEffect, useState } from 'react'
+import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js'
+import { useState } from 'react'
+import { Metaplex } from '@metaplex-foundation/js'
 
-type PhantomEvent = 'disconnect' | 'connect' | 'accountChanged'
+const connection = new Connection(clusterApiUrl('mainnet-beta'))
 
-type Props = {}
+export default function Wallet({}) {
+	const [walletAddress, setWalletAdress] = useState('')
 
-const walletAdress = '6H3uwcQxX8qRSJqp5NYHL9WvziBQKvwXVMRa3nQ83d7n'
-const endPoint = 'https://api.mainnet-beta.solana.com'
-const connection = new Connection(endPoint)
+	const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+		setWalletAdress(target.value)
+	}
 
-export default function Wallet({}: Props) {
-	useEffect(() => {
-		async function fetchBalance() {
-			const pubKey = new PublicKey(walletAdress)
-			const balance = await connection.getTokenAccountsByOwner(pubKey, {
-				programId: TOKEN_PROGRAM_ID,
-			})
-			console.log(balance)
-		}
-		fetchBalance()
-	}, [])
+	const handleClickButton = async () => {
+		const metaplex = new Metaplex(connection)
+		const nft = await metaplex
+			.nfts()
+			.findAllByOwner({ owner: new PublicKey(walletAddress) })
+			.run()
+		const cath = nft.filter((e) => e.symbol === 'WLKNC')
+		const test = await (await fetch(cath[0].uri)).json()
+		console.log(test)
+	}
 
-	return <div>Wallet</div>
+	return (
+		<div>
+			<input type="text" value={walletAddress} onChange={handleChangeInput} />
+			<button onClick={handleClickButton}>Validate</button>
+		</div>
+	)
 }
