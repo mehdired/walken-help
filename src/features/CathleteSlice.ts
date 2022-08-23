@@ -71,6 +71,20 @@ export const cathleteSlice = createSlice({
 			window.localStorage.setItem('wh-cath', JSON.stringify([initCathlete]))
 			return [initCathlete]
 		},
+
+		fillFromWallet: (state, { payload }) => {
+			return [
+				{
+					id: nanoid(),
+					rarity: payload.rarity,
+					level: 6,
+					energy: energyMap.get('common')!,
+					earnPerDay: 4.04,
+					validated: true,
+				},
+				...initialState,
+			]
+		},
 	},
 })
 
@@ -83,6 +97,7 @@ export const {
 	fillFromStorage,
 	savingData,
 	resetCathState,
+	fillFromWallet,
 } = cathleteSlice.actions
 
 export default cathleteSlice.reducer

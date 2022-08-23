@@ -1,11 +1,14 @@
 import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js'
 import { useState } from 'react'
 import { Metaplex } from '@metaplex-foundation/js'
+import { fillFromWallet } from '@features/CathleteSlice'
+import { useAppDispatch } from '@/store'
 
 const connection = new Connection(clusterApiUrl('mainnet-beta'))
 
 export default function Wallet({}) {
 	const [walletAddress, setWalletAdress] = useState('')
+	const dispatch = useAppDispatch()
 
 	const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
 		setWalletAdress(target.value)
@@ -19,7 +22,8 @@ export default function Wallet({}) {
 			.run()
 		const cath = nft.filter((e) => e.symbol === 'WLKNC')
 		const test = await (await fetch(cath[0].uri)).json()
-		console.log(test)
+
+		dispatch(fillFromWallet({ rarity: test.attributes[1].value.toLowerCase() }))
 	}
 
 	return (
