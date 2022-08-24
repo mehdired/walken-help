@@ -13,7 +13,7 @@ type dataFromWallet = {
 type ReturnReduceType = { rarity: RarityTypes; image: string; name: string }[]
 
 const connection = new Connection(clusterApiUrl('mainnet-beta'))
-const metaplex = new Metaplex(connection)
+const metaplex = Metaplex.make(connection)
 
 export default function Wallet({}) {
 	const [walletAddress, setWalletAdress] = useState('')

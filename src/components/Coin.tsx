@@ -13,7 +13,7 @@ const StyledCoinList = styled('ul', {
 	padding: '18px 10px',
 	listStyle: 'none',
 	position: 'absolute',
-	right: '0',
+	right: '20px',
 	border: `1px solid ${theme.colors.border}`,
 })
 
