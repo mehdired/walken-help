@@ -29,9 +29,9 @@ export default function App() {
 
 	return (
 		<StyledApp className="App">
+			<Coin />
 			<div style={{ position: 'relative' }}>
 				<Wallet />
-				<Coin />
 				<SaveData />
 				<Earn />
 				<Cathlete />

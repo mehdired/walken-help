@@ -21,9 +21,14 @@ const StyledCathlete = styled('div', {
 	boxShadow: `0px 4px 12px ${theme.colors.shadow}`,
 	borderRadius: '12px',
 	backgroundColor: '#fff',
-	width: '165px',
-	height: '250px',
 	padding: '10px',
+})
+
+const StyledCathContainer = styled('div', {
+	display: 'grid',
+	gridTemplateColumns: 'repeat(4, 190px)',
+	gridAutoRows: '290px',
+	gap: '10px',
 })
 
 type Props = {}
@@ -61,30 +66,37 @@ export default function Cathlete({}: Props) {
 	return (
 		<div>
 			<button onClick={handleReset}>Reset cathletes</button>
-			{cathlete.map(({ id, validated, rarity, level, earnPerDay, image }) => (
-				<StyledCathlete key={id}>
-					{!validated ? (
-						<CathleteForm
-							id={id}
-							level={level}
-							onChangeRarity={handleChangeRarity}
-							onChangeLevel={handleChangeLevel}
-							onClickValidate={handleValidateCath}
-						/>
-					) : (
-						<CathleteValidated image={image ?? undefined} level={level} rarity={rarity} earn={earnPerDay} />
-					)}
+			<StyledCathContainer>
+				{cathlete.map(({ id, validated, rarity, level, earnPerDay, image }) => (
+					<StyledCathlete key={id}>
+						{!validated ? (
+							<CathleteForm
+								id={id}
+								level={level}
+								onChangeRarity={handleChangeRarity}
+								onChangeLevel={handleChangeLevel}
+								onClickValidate={handleValidateCath}
+							/>
+						) : (
+							<CathleteValidated
+								image={image ?? undefined}
+								level={level}
+								rarity={rarity}
+								earn={earnPerDay}
+							/>
+						)}
+					</StyledCathlete>
+				))}
+				<StyledCathlete>
+					<button
+						onClick={() => {
+							dispatch(addCathlete())
+						}}
+					>
+						add
+					</button>
 				</StyledCathlete>
-			))}
-			<StyledCathlete>
-				<button
-					onClick={() => {
-						dispatch(addCathlete())
-					}}
-				>
-					add
-				</button>
-			</StyledCathlete>
+			</StyledCathContainer>
 		</div>
 	)
 }
