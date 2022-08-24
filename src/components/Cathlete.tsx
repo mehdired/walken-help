@@ -61,7 +61,7 @@ export default function Cathlete({}: Props) {
 	return (
 		<div>
 			<button onClick={handleReset}>Reset cathletes</button>
-			{cathlete.map(({ id, validated, rarity, level, earnPerDay }) => (
+			{cathlete.map(({ id, validated, rarity, level, earnPerDay, image }) => (
 				<StyledCathlete key={id}>
 					{!validated ? (
 						<CathleteForm
@@ -72,7 +72,7 @@ export default function Cathlete({}: Props) {
 							onClickValidate={handleValidateCath}
 						/>
 					) : (
-						<CathleteValidated level={level} rarity={rarity} earn={earnPerDay} />
+						<CathleteValidated image={image ?? undefined} level={level} rarity={rarity} earn={earnPerDay} />
 					)}
 				</StyledCathlete>
 			))}

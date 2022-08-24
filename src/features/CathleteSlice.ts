@@ -12,6 +12,7 @@ const initCathlete = {
 	energy: energyMap.get('common')!,
 	earnPerDay: 0,
 	validated: false,
+	image: undefined,
 }
 
 const initialState: Cathlete[] = [initCathlete]
@@ -72,18 +73,21 @@ export const cathleteSlice = createSlice({
 			return [initCathlete]
 		},
 
-		fillFromWallet: (state, { payload }) => {
-			return [
-				{
-					id: nanoid(),
-					rarity: payload.rarity,
-					level: 6,
-					energy: energyMap.get('common')!,
-					earnPerDay: 4.04,
-					validated: true,
-				},
-				...initialState,
-			]
+		fillFromWallet: (_, { payload }: PayloadAction<{ rarity: RarityTypes; image: string }[]>) => {
+			return payload.reduce<Cathlete[]>((acc, cath) => {
+				return [
+					...acc,
+					{
+						id: nanoid(),
+						rarity: cath.rarity,
+						level: 6,
+						energy: energyMap.get(cath.rarity)!,
+						earnPerDay: 4.04,
+						validated: true,
+						image: cath.image,
+					},
+				]
+			}, [])
 		},
 	},
 })

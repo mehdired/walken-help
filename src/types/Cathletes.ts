@@ -9,4 +9,5 @@ export interface Cathlete {
 	energy: EnergyType
 	earnPerDay: number
 	validated: boolean
+	image?: string
 }
