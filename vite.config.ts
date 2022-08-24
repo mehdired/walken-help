@@ -21,14 +21,14 @@ export default defineConfig({
 		},
 	},
 	build: {
-		target: 'es2020',
+		target: 'esNext',
 		rollupOptions: {
 			plugins: [nodePolyfills({ crypto: true })],
 		},
 	},
 	optimizeDeps: {
 		esbuildOptions: {
-			target: 'es2020',
+			target: 'esNext',
 			plugins: [NodeGlobalsPolyfillPlugin({ buffer: true })],
 		},
 	},
