@@ -13,6 +13,7 @@ const initCathlete = {
 	earnPerDay: 0,
 	validated: false,
 	image: undefined,
+	name: undefined,
 }
 
 const initialState: Cathlete[] = [initCathlete]
@@ -73,7 +74,7 @@ export const cathleteSlice = createSlice({
 			return [initCathlete]
 		},
 
-		fillFromWallet: (_, { payload }: PayloadAction<{ rarity: RarityTypes; image: string }[]>) => {
+		fillFromWallet: (_, { payload }: PayloadAction<{ rarity: RarityTypes; image: string; name: string }[]>) => {
 			return payload.reduce<Cathlete[]>((acc, cath) => {
 				return [
 					...acc,
@@ -85,6 +86,7 @@ export const cathleteSlice = createSlice({
 						earnPerDay: 4.04,
 						validated: true,
 						image: cath.image,
+						name: cath.name,
 					},
 				]
 			}, [])

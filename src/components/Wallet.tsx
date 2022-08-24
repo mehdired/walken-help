@@ -10,7 +10,7 @@ type dataFromWallet = {
 	image: string
 }
 
-type ReturnReduceType = { rarity: RarityTypes; image: string }[]
+type ReturnReduceType = { rarity: RarityTypes; image: string; name: string }[]
 
 const connection = new Connection(clusterApiUrl('mainnet-beta'))
 const metaplex = new Metaplex(connection)
@@ -37,7 +37,7 @@ export default function Wallet({}) {
 		return cathFromWallet.reduce<ReturnReduceType>((acc, cath) => {
 			const rarity = cath.attributes[1]?.value.toLowerCase() as RarityTypes
 
-			return [...acc, { rarity, image: cath.image }]
+			return [...acc, { rarity, image: cath.image, name: cath.attributes[0]?.value }]
 		}, [])
 	}
 
@@ -53,7 +53,7 @@ export default function Wallet({}) {
 
 	return (
 		<div>
-			<input type="text" value={walletAddress} onChange={handleChangeInput} />
+			<input type="text" value={walletAddress} onChange={handleChangeInput} placeholder="Wallet Address" />
 			<button onClick={handleClickButton}>Validate</button>
 		</div>
 	)
