@@ -4,6 +4,7 @@ import Cathlete from '@components/Cathlete'
 import Coin from '@components/Coin'
 import Earn from '@components/Earn'
 import SaveData from '@components/SaveData'
+import Wallet from '@components/Wallet'
 
 const globalStyles = globalCss({
 	'@font-face': {
@@ -28,8 +29,9 @@ export default function App() {
 
 	return (
 		<StyledApp className="App">
+			<Coin />
 			<div style={{ position: 'relative' }}>
-				<Coin />
+				<Wallet />
 				<SaveData />
 				<Earn />
 				<Cathlete />

@@ -98,17 +98,25 @@ const StyledIcon = styled('div', {
 	},
 })
 
+const StyledImage = styled('img', {
+	width: '100%',
+})
+
 type Props = {
 	level: number
 	rarity: RarityTypes
 	earn: number
+	image: string | undefined
+	name: string | undefined
 }
 
-export default function CathleteValidated({ level, rarity, earn }: Props) {
+export default function CathleteValidated({ level, rarity, earn, image, name }: Props) {
 	return (
 		<StyledCathleteValidated>
 			<StyledEarn>Earn Max : {earn} WLKN</StyledEarn>
 			<p style={{ marginBottom: '7px' }}>level {level}</p>
+			{image && <StyledImage src={image} />}
+			{name && <p>{name}</p>}
 			<div>
 				<StyledIcon rarity={rarity}>
 					<img src={`/images/${rarity}.svg`} />
