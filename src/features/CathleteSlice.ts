@@ -17,25 +17,31 @@ type dataFromWallet = {
 
 type ReturnReduceType = { rarity: RarityTypes; image: string; name: string }[]
 
-export const fetchCathFromWallet = createAsyncThunk('cathlete/fetchCathFromWallet', async (walletAddress: string) => {
-	const nft = await metaplex
-		.nfts()
-		.findAllByOwner({ owner: new PublicKey(walletAddress) })
-		.run()
-	const cathleteMetadata = nft.filter((e) => e.symbol === 'WLKNC')
+export const fetchCathFromWallet = createAsyncThunk(
+	'cathlete/fetchCathFromWallet',
+	async (walletAddress: string) => {
+		const nft = await metaplex
+			.nfts()
+			.findAllByOwner({ owner: new PublicKey(walletAddress) })
+			.run()
+		const cathleteMetadata = nft.filter((e) => e.symbol === 'WLKNC')
 
-	const resquests = cathleteMetadata.map(async (cath) => {
-		const res = await fetch(cath.uri)
-		return res.json()
-	})
-	const cathFromWallet = await Promise.all<dataFromWallet>(resquests)
+		const resquests = cathleteMetadata.map(async (cath) => {
+			const res = await fetch(cath.uri)
+			return res.json()
+		})
+		const cathFromWallet = await Promise.all<dataFromWallet>(resquests)
 
-	return cathFromWallet.reduce<ReturnReduceType>((acc, cath) => {
-		const rarity = cath.attributes[1]?.value.toLowerCase() as RarityTypes
+		return cathFromWallet.reduce<ReturnReduceType>((acc, cath) => {
+			const rarity = cath.attributes[1]?.value.toLowerCase() as RarityTypes
 
-		return [...acc, { rarity, image: cath.image, name: cath.attributes[0]?.value }]
-	}, [])
-})
+			return [
+				...acc,
+				{ rarity, image: cath.image, name: cath.attributes[0]?.value },
+			]
+		}, [])
+	}
+)
 
 const initCathlete = {
 	id: nanoid(),
@@ -48,23 +54,35 @@ const initCathlete = {
 	name: undefined,
 }
 
-const initialState: { isLoading: boolean; list: Cathlete[] } = { isLoading: false, list: [initCathlete] }
+const initialState: { isLoading: boolean; list: Cathlete[] } = {
+	isLoading: false,
+	list: [initCathlete],
+}
 
 export const cathleteSlice = createSlice({
 	name: 'cathlete',
 	initialState,
 	reducers: {
 		addCathlete: (state) => {
-			return { isLoading: false, list: [...state.list, { ...initCathlete, id: nanoid() }] }
+			return {
+				isLoading: false,
+				list: [...state.list, { ...initCathlete, id: nanoid() }],
+			}
 		},
-		onChangeRarity: (state, { payload }: PayloadAction<{ id: string; value: RarityTypes }>) => {
+		onChangeRarity: (
+			state,
+			{ payload }: PayloadAction<{ id: string; value: RarityTypes }>
+		) => {
 			const goodCath = state.list.find((cat) => cat.id === payload.id)
 
 			if (goodCath) {
 				goodCath.rarity = payload.value
 			}
 		},
-		onChangeLevel: (state, { payload }: PayloadAction<{ id: string; value: string }>) => {
+		onChangeLevel: (
+			state,
+			{ payload }: PayloadAction<{ id: string; value: string }>
+		) => {
 			const goodCath = state.list.find((cat) => cat.id === payload.id)
 
 			if (goodCath) {
@@ -84,8 +102,11 @@ export const cathleteSlice = createSlice({
 
 			if (goodCath) {
 				const MINUTES_PER_DAY = 1440
-				const goodLeague = leagues.find((league) => goodCath.level - 1 <= league.minLevel)
-				const wlknEar = (MINUTES_PER_DAY / goodCath.energy.cooldown) * goodLeague?.reward!
+				const goodLeague = leagues.find(
+					(league) => goodCath.level - 1 <= league.minLevel
+				)
+				const wlknEar =
+					(MINUTES_PER_DAY / goodCath.energy.cooldown) * goodLeague?.reward!
 				goodCath.earnPerDay = Number(wlknEar.toFixed(2))
 			}
 		},
