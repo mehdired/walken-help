@@ -6,7 +6,7 @@ const MINUTES_PER_DAY = 1440
 type Props = {}
 
 export default function Earn({}: Props) {
-	const cathletes = useAppSelector((state) => state.cathlete)
+	const cathletes = useAppSelector((state) => state.cathlete.list)
 
 	const wlknEarnPerDay = cathletes.reduce((acc, cathlete) => {
 		if (!cathlete.validated) return acc

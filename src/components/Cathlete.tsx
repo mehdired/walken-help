@@ -14,6 +14,7 @@ import { styled, theme } from '../../stitches.config'
 import { useAppDispatch, useAppSelector } from '../store'
 import CathleteValidated from './CathleteValidated'
 import CathleteForm from './CathleteForm'
+import Loader from './Loader'
 import { RarityTypes } from '@/types/Rarity'
 
 const StyledCathlete = styled('div', {
@@ -34,7 +35,7 @@ const StyledCathContainer = styled('div', {
 type Props = {}
 
 export default function Cathlete({}: Props) {
-	const cathlete = useAppSelector((state) => state.cathlete)
+	const { isLoading, list: cathlete } = useAppSelector((state) => state.cathlete)
 	const saveData = useAppSelector((state) => state.saveData)
 	const dispatch = useAppDispatch()
 
@@ -62,6 +63,8 @@ export default function Cathlete({}: Props) {
 	const handleReset = () => {
 		dispatch(resetCathState())
 	}
+
+	if (isLoading) return <Loader fullscreen={true} />
 
 	return (
 		<div>
