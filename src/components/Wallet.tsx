@@ -4,6 +4,7 @@ import { Metaplex } from '@metaplex-foundation/js'
 import { fillFromWallet } from '@features/CathleteSlice'
 import { useAppDispatch } from '@/store'
 import { RarityTypes } from '@/types/Rarity'
+import Loader from './Loader'
 
 type dataFromWallet = {
 	attributes: { value: string }[]
@@ -17,6 +18,7 @@ const metaplex = Metaplex.make(connection)
 
 export default function Wallet({}) {
 	const [walletAddress, setWalletAdress] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
 	const dispatch = useAppDispatch()
 
 	const fetchCath = async () => {
@@ -46,10 +48,14 @@ export default function Wallet({}) {
 	}
 
 	const handleClickButton = async () => {
+		setIsLoading(true)
 		const cathData = await fetchCath()
 
 		dispatch(fillFromWallet(cathData))
+		setIsLoading(false)
 	}
+
+	if (isLoading) return <Loader fullscreen={true} />
 
 	return (
 		<div>
