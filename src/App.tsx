@@ -1,10 +1,10 @@
 import { styled } from '../stitches.config'
 import { globalCss } from '@stitches/react'
 import Cathlete from '@components/Cathlete'
-import Coin from '@components/Coin'
 import Earn from '@components/Earn'
 import SaveData from '@components/SaveData'
 import Wallet from '@components/Wallet'
+import Header from '@components/Header'
 
 const globalStyles = globalCss({
 	'@font-face': {
@@ -29,7 +29,7 @@ export default function App() {
 
 	return (
 		<StyledApp className="App">
-			<Coin />
+			<Header />
 			<div style={{ position: 'relative' }}>
 				<Wallet />
 				<SaveData />
