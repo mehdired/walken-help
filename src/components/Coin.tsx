@@ -12,8 +12,7 @@ const StyledCoinList = styled('ul', {
 	justifyContent: 'space-between',
 	padding: '18px 10px',
 	listStyle: 'none',
-	position: 'absolute',
-	right: '20px',
+	maxWidth: '180px',
 	border: `1px solid ${theme.colors.border}`,
 })
 
@@ -66,11 +65,19 @@ export default function Coin() {
 		<StyledCoinList>
 			{coin.list.map((element) => (
 				<StyledCoinListItem key={element.symbol}>
-					<div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							marginBottom: '5px',
+						}}
+					>
 						<StyledLogo src={`/images/${element.symbol}.svg`} />
 						<StyledPrice>${element.price}</StyledPrice>
 					</div>
-					<StyledChange color={element.colorChange}>{element.change}%</StyledChange>
+					<StyledChange color={element.colorChange}>
+						{element.change}%
+					</StyledChange>
 				</StyledCoinListItem>
 			))}
 		</StyledCoinList>

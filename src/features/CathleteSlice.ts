@@ -56,7 +56,7 @@ const initCathlete = {
 
 const initialState: { isLoading: boolean; list: Cathlete[] } = {
 	isLoading: false,
-	list: [initCathlete],
+	list: [],
 }
 
 export const cathleteSlice = createSlice({
