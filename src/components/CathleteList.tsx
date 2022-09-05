@@ -217,7 +217,7 @@ const StyledCathContainer = styled('div', {
 
 export default function Cathlete() {
 	const { isLoading, list: cathlete } = useAppSelector((state) => state.cathlete)
-	const saveData = useAppSelector((state) => state.saveData)
+	//const saveData = useAppSelector((state) => state.saveData)
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
@@ -236,9 +236,9 @@ export default function Cathlete() {
 		dispatch(validateCathlete(id))
 		dispatch(earnCathlete(id))
 
-		if (saveData) {
+		/* if (saveData) {
 			dispatch(savingData())
-		}
+		} */
 	}
 
 	const handleReset = () => {
