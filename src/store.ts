@@ -4,6 +4,7 @@ import coinReducer from '@features/CoinSlice'
 import cathleteReducer from '@features/CathleteSlice'
 import saveDataReducer from '@features/SaveDataSlice'
 import wayChoiceSlice from '@features/WayChoiceSlice'
+import walletSlice from '@features/WalletSlice'
 
 export const store = configureStore({
 	reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
 		cathlete: cathleteReducer,
 		saveData: saveDataReducer,
 		wayChoice: wayChoiceSlice,
+		wallet: walletSlice,
 	},
 })
 

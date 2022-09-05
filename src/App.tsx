@@ -1,6 +1,6 @@
 import { styled } from '../stitches.config'
 import { globalCss } from '@stitches/react'
-import Cathlete from '@components/Cathlete'
+import Cathlete from '@components/CathleteList'
 import Earn from '@components/Earn'
 import Wallet from '@components/Wallet'
 import Header from '@components/Header'
@@ -27,7 +27,10 @@ const StyledApp = styled('div', {
 
 export default function App() {
 	globalStyles()
+
 	const { isWallet } = useAppSelector((state) => state.wayChoice)
+	const { submited } = useAppSelector((state) => state.wallet)
+	const appendCath = submited || isWallet === false
 
 	return (
 		<StyledApp className="App">
@@ -35,8 +38,12 @@ export default function App() {
 			<div style={{ position: 'relative' }}>
 				<WayChoice />
 				{isWallet && <Wallet />}
-				<Earn />
-				<Cathlete />
+				{appendCath && (
+					<>
+						<Earn />
+						<Cathlete />
+					</>
+				)}
 			</div>
 		</StyledApp>
 	)

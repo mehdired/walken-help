@@ -1,23 +1,36 @@
 import { useState } from 'react'
 import { fetchCathFromWallet } from '@features/CathleteSlice'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { onChangeWallet, onSubmitWallet } from '@features/WalletSlice'
+import { styled } from '@/../stitches.config'
+
+const StyledWallet = styled('div', {
+	textAlign: 'center',
+	marginBottom: '20px',
+})
 
 export default function Wallet({}) {
-	const [walletAddress, setWalletAdress] = useState('')
+	const { address } = useAppSelector((state) => state.wallet)
 	const dispatch = useAppDispatch()
 
 	const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-		setWalletAdress(target.value)
+		dispatch(onChangeWallet(target.value))
 	}
 
 	const handleClickButton = () => {
-		dispatch(fetchCathFromWallet(walletAddress))
+		dispatch(fetchCathFromWallet(address))
+		dispatch(onSubmitWallet())
 	}
 
 	return (
-		<div>
-			<input type="text" value={walletAddress} onChange={handleChangeInput} placeholder="Wallet Address" />
+		<StyledWallet>
+			<input
+				type="text"
+				value={address}
+				onChange={handleChangeInput}
+				placeholder="Wallet Address"
+			/>
 			<button onClick={handleClickButton}>Validate</button>
-		</div>
+		</StyledWallet>
 	)
 }

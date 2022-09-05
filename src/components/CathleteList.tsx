@@ -210,7 +210,7 @@ const StyledCathlete = styled('div', {
 
 const StyledCathContainer = styled('div', {
 	display: 'grid',
-	gridTemplateColumns: 'repeat(4, 190px)',
+	gridTemplateColumns: 'repeat(2, 1fr)',
 	gridAutoRows: '290px',
 	gap: '10px',
 })
@@ -245,11 +245,11 @@ export default function Cathlete() {
 		dispatch(resetCathState())
 	}
 
-	if (isLoading) return <Loader fullscreen={true} />
+	if (isLoading) return <Loader />
 
 	return (
 		<div>
-			<button onClick={handleReset}>Reset cathletes</button>
+			{/* <button onClick={handleReset}>Reset cathletes</button> */}
 			<StyledCathContainer>
 				{cathlete.map(
 					({ id, validated, rarity, level, earnPerDay, image, name }) => (

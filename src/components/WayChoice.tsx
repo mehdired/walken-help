@@ -1,12 +1,20 @@
+import { styled } from '@/../stitches.config'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { onClickChoiceButton } from '@features/WayChoiceSlice'
+
+const StyledWayChoice = styled('div', {
+	display: 'flex',
+	justifyContent: 'center',
+	margin: '10px 0',
+})
 
 export default function WayChoice() {
 	const dispatch = useAppDispatch()
 
 	return (
-		<div>
+		<StyledWayChoice>
 			<button
+				style={{ marginRight: '8px' }}
 				onClick={() => {
 					dispatch(onClickChoiceButton(true))
 				}}
@@ -20,6 +28,6 @@ export default function WayChoice() {
 			>
 				I dont have wallet
 			</button>
-		</div>
+		</StyledWayChoice>
 	)
 }

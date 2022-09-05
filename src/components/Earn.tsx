@@ -1,11 +1,14 @@
+import { styled } from '@/../stitches.config'
 import { useAppSelector } from '@/store'
 import { leagues } from '@/types/League'
 
 const MINUTES_PER_DAY = 1440
 
-type Props = {}
+const StyledEarn = styled('p', {
+	textAlign: 'center',
+})
 
-export default function Earn({}: Props) {
+export default function Earn() {
 	const cathletes = useAppSelector((state) => state.cathlete.list)
 
 	const wlknEarnPerDay = cathletes.reduce((acc, cathlete) => {
@@ -16,5 +19,5 @@ export default function Earn({}: Props) {
 		return acc + Number(wlknEar.toFixed(2))
 	}, 0)
 
-	return <div>Maximum WLKN per day : {wlknEarnPerDay}</div>
+	return <StyledEarn>Maximum WLKN per day : {wlknEarnPerDay}</StyledEarn>
 }
