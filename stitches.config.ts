@@ -16,9 +16,9 @@ export const { styled, theme } = createStitches({
 		fonts: {
 			main: 'Nunito Sans',
 		},
-		media: {
-			mq2: '(min-width: 768px)',
-			mq3: '(min-width: 1024px)',
-		},
+	},
+	media: {
+		mqTab: '(min-width: 768px)',
+		mqDesk: '(min-width: 1024px)',
 	},
 })

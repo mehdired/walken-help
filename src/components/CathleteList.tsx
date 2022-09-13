@@ -211,8 +211,17 @@ const StyledCathlete = styled('div', {
 const StyledCathContainer = styled('div', {
 	display: 'grid',
 	gridTemplateColumns: 'repeat(2, 1fr)',
-	gridAutoRows: '290px',
+	gridAutoRows: '360px',
 	gap: '10px',
+
+	'@mqTab': {
+		gridTemplateColumns: 'repeat(3, 235px)',
+		justifyContent: 'center',
+	},
+
+	'@mqDesk': {
+		gridTemplateColumns: 'repeat(4, 1fr)',
+	},
 })
 
 export default function Cathlete() {
